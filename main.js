@@ -8,7 +8,7 @@ const fejlec = document.createElement('thead') // létrehozzuk a fejléc változ
 tablazat.appendChild(fejlec) // a táblázathoz hozzá appendáljuk a thedünket
 
 const tr = document.createElement('tr') // létrehozzunk a fejlécünknek a tr-jét
-fejlec.appendChild(tr) // hozzá appendáljuk a fejléchez a tr (sort)
+ // hozzá appendáljuk a fejléchez a tr (sort)
 
 
 const th = document.createElement('th') //th létrehozása
@@ -20,16 +20,17 @@ th2.innerHTML = "Időszak"  // th értékmegadása
 tr.appendChild(th2) // th hozzá appendálása a tr (fejléc sor)
 
 const th3 = document.createElement('th') //th létrehozása
+th3.colSpan = 2; //beállítjuk a colspant
 th3.innerHTML = "Képviselők" // th értékmegadása
 tr.appendChild(th3) // th hozzá appendálása a tr (fejléc sor)
 
-
+fejlec.appendChild(tr) //fejléchez hozzá appendáljuk a tr-t (fejléc-sor)
 
 /////////////////////////////////////////////////////
 
 const tbody = document.createElement('tbody') // lérehozzuk a tbody változót
 
-document.body.appendChild(tbody) //hozzátesszük a bodyhoz a tbody változót
+tablazat.appendChild(tbody) //hozzátesszük a bodyhoz a tbody változót
 
 const firstrowtr = document.createElement('tr') // megcsináljuk az első sorunkat 
 
@@ -43,6 +44,7 @@ firstrowtr.appendChild(cella2) // cella hozzáfűzése az első sorhoz
 
 const cella3 = document.createElement('td')  // a harmadik td cella létrehozás
 cella3.innerHTML = "Alhazen" // td cella értékadás
+cella3.colSpan = 2 //beállítjuk a colspant
 firstrowtr.appendChild(cella3) // cella hozzáfűzése az első sorhoz
 
 tbody.appendChild(firstrowtr) // a tbodyhoz hozzáfűzzük az első sorunkat
