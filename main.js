@@ -38,19 +38,25 @@ const array = [
 
 const tablazat = document.createElement('table') // Létrehozzuk a táblázat változo
 document.body.appendChild(tablazat) // hozzá appendáljuk a táblázatot a bodyhoz
-const header = document.createElement('thead')
-tablazat.appendChild(header)
-const tr = document.createElement('tr')
-header.appendChild(tr)
-const tbody = document.createElement('tbody')
-tablazat.appendChild(tbody)
+const header = document.createElement('thead') // létrehozunk egy thead-et
+tablazat.appendChild(header) //hozzátesszük a táblázatunkhoz
+const tr = document.createElement('tr') //létrehozunk egy tr-sort
+header.appendChild(tr) //a tr-t hozzátesszük a headerünkhöz (thead)
+const tbody = document.createElement('tbody') //csinálunk egy tbodyt
+tablazat.appendChild(tbody) //a tbody-t pedig a táblázatunkhoz fűzünk.
 
 
-for(let adat in fejlec[0]) { //for ciklussal az adat a fejléc arraynek az első elemjét nézzük
-    const th = document.createElement('th') //létrehozunk egy th elementet
-    th.innerHTML = fejlec[0][adat] // a th elementnek mindig az adott érték lesz fentről lefelé a fejléc arrayben.
-    tr.appendChild(th) //majd hozzáappendáljuk a létrehozott sorunkhoz
+for (let adat in fejlec[0]) { // for ciklussal az adatokat nézzük a fejléc első eleméből
+    const th = document.createElement('th'); // létrehozunk egy th elemet
+    th.innerHTML = fejlec[0][adat];; // a th elem belső HTML-jét az aktuális adat értékére állítjuk
+    tr.appendChild(th); // hozzáadjuk a sorhoz
+
+    // Feltételezzük, hogy a fejlec[0] tartalmazza a fejlec3-at, amelyhez colSpan-t kell beállítani
+    if (adat === 'fejlec3') { 
+        th.colSpan = 2; // colSpan beállítása a th elemre
+    }
 }
+
 
 
 
@@ -70,13 +76,20 @@ for(let i = 0; i < array.length; i++ ) { //végigiterálok egy for ciklussal az 
 
     const harmadiksor = document.createElement('td') //harmadiksor létrehozása
     harmadiksor.innerHTML = mostanielement.sor3 //harmadiksor innerHTML-je a az array-ben a mostanielement (i)-nek a sor3.je
-    harmadiksor.colSpan = 2 //beállítjuk a colspant.
+    if (i === 0) { 
+        harmadiksor.colSpan = 2 // colSpan bellítása
+    }
+    
     sor.appendChild(harmadiksor) //hozzátesszük a sorhoz az elso oszlop harmadik elemjét 
+    
+    if( i > 0 ) { // ugye ha az első itrácion végig ment akkor már nyugodtan lehet negyedik sor
+        const negyediksor = document.createElement('td') //negyediksor létrehozása
+        negyediksor.innerHTML = mostanielement.sor4 //negyediksor innerHTML-je a az array-ben a mostanielement (i)-nek a sor4.je
+        sor.appendChild(negyediksor) //hozzátesszük a sorhoz az elso oszlop negyedik elemjét 
 
-    const negyediksor = document.createElement('td') //negyediksor létrehozása
-    negyediksor.innerHTML = mostanielement.sor4 //negyediksor innerHTML-je a az array-ben a mostanielement (i)-nek a sor4.je
-    sor.appendChild(negyediksor) //hozzátesszük a sorhoz az elso oszlop negyedik elemjét 
+    }
     tbody.appendChild(sor)
+   
    
 }
 
