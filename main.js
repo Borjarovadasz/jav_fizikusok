@@ -46,50 +46,54 @@ const tbody = document.createElement('tbody') //csinálunk egy tbodyt
 tablazat.appendChild(tbody) //a tbody-t pedig a táblázatunkhoz fűzünk.
 
 
-for (let adat in fejlec[0]) { // for ciklussal az adatokat nézzük a fejléc első eleméből
-    const th = document.createElement('th'); // létrehozunk egy th elemet
-    th.innerHTML = fejlec[0][adat];; // a th elem belső HTML-jét az aktuális adat értékére állítjuk
-    tr.appendChild(th); // hozzáadjuk a sorhoz
 
-    // Feltételezzük, hogy a fejlec[0] tartalmazza a fejlec3-at, amelyhez colSpan-t kell beállítani
-    if (adat === 'fejlec3') { 
-        th.colSpan = 2; // colSpan beállítása a th elemre
+
+
+function tablegenerate() {
+
+    for (let adat in fejlec[0]) { // for ciklussal az adatokat nézzük a fejléc első eleméből
+        const th = document.createElement('th'); // létrehozunk egy th elemet
+        th.innerHTML = fejlec[0][adat];; // a th elem belső HTML-jét az aktuális adat értékére állítjuk
+        tr.appendChild(th); // hozzáadjuk a sorhoz
+    
+        // Feltételezzük, hogy a fejlec[0] tartalmazza a fejlec3-at, amelyhez colSpan-t kell beállítani
+        if (adat === 'fejlec3') { 
+            th.colSpan = 2; // colSpan beállítása a th elemre
+        }
     }
+    for(let i = 0; i < array.length; i++ ) { //végigiterálok egy for ciklussal az array-en
+        const mostanielement = array[i]  //az i-dik element a mostanielement lesz
+        const sor = document.createElement('tr') // csinálok egy sort
+    
+        tablazat.appendChild(sor) //a fő táblázathoz hozzácsatolom a sort
+    
+        const elsosor = document.createElement('td') //elsosor létrehozása
+        elsosor.innerHTML = mostanielement.sor1 //elsosor innerHTML-je a az array-ben a mostanielement (i)-nek a sor1.je
+        sor.appendChild(elsosor) //hozzátesszük a sorhoz az elso oszlop elso elemjét 
+    
+        const masodiksor = document.createElement('td') //masodiksor létrehozása
+        masodiksor.innerHTML = mostanielement.sor2 //masodiksor innerHTML-je a az array-ben a mostanielement (i)-nek a sor2.je
+        sor.appendChild(masodiksor) //hozzátesszük a sorhoz az elso oszlop masodik elemjét 
+    
+        const harmadiksor = document.createElement('td') //harmadiksor létrehozása
+        harmadiksor.innerHTML = mostanielement.sor3 //harmadiksor innerHTML-je a az array-ben a mostanielement (i)-nek a sor3.je
+        if (i === 0) { 
+            harmadiksor.colSpan = 2 // colSpan bellítása
+        }
+        
+        sor.appendChild(harmadiksor) //hozzátesszük a sorhoz az elso oszlop harmadik elemjét 
+        
+        if( i > 0 ) { // ugye ha az első itrácion végig ment akkor már nyugodtan lehet negyedik sor
+            const negyediksor = document.createElement('td') //negyediksor létrehozása
+            negyediksor.innerHTML = mostanielement.sor4 //negyediksor innerHTML-je a az array-ben a mostanielement (i)-nek a sor4.je
+            sor.appendChild(negyediksor) //hozzátesszük a sorhoz az elso oszlop negyedik elemjét 
+    
+        }
+        tbody.appendChild(sor)
+       
 }
 
-
-
-
-for(let i = 0; i < array.length; i++ ) { //végigiterálok egy for ciklussal az array-en
-    const mostanielement = array[i]  //az i-dik element a mostanielement lesz
-    const sor = document.createElement('tr') // csinálok egy sort
-
-    tablazat.appendChild(sor) //a fő táblázathoz hozzácsatolom a sort
-
-    const elsosor = document.createElement('td') //elsosor létrehozása
-    elsosor.innerHTML = mostanielement.sor1 //elsosor innerHTML-je a az array-ben a mostanielement (i)-nek a sor1.je
-    sor.appendChild(elsosor) //hozzátesszük a sorhoz az elso oszlop elso elemjét 
-
-    const masodiksor = document.createElement('td') //masodiksor létrehozása
-    masodiksor.innerHTML = mostanielement.sor2 //masodiksor innerHTML-je a az array-ben a mostanielement (i)-nek a sor2.je
-    sor.appendChild(masodiksor) //hozzátesszük a sorhoz az elso oszlop masodik elemjét 
-
-    const harmadiksor = document.createElement('td') //harmadiksor létrehozása
-    harmadiksor.innerHTML = mostanielement.sor3 //harmadiksor innerHTML-je a az array-ben a mostanielement (i)-nek a sor3.je
-    if (i === 0) { 
-        harmadiksor.colSpan = 2 // colSpan bellítása
-    }
-    
-    sor.appendChild(harmadiksor) //hozzátesszük a sorhoz az elso oszlop harmadik elemjét 
-    
-    if( i > 0 ) { // ugye ha az első itrácion végig ment akkor már nyugodtan lehet negyedik sor
-        const negyediksor = document.createElement('td') //negyediksor létrehozása
-        negyediksor.innerHTML = mostanielement.sor4 //negyediksor innerHTML-je a az array-ben a mostanielement (i)-nek a sor4.je
-        sor.appendChild(negyediksor) //hozzátesszük a sorhoz az elso oszlop negyedik elemjét 
-
-    }
-    tbody.appendChild(sor)
-   
-   
 }
+
+tablegenerate()
 
