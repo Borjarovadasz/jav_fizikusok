@@ -12,6 +12,7 @@ const array = [
         fizikaterulet: "Optika", //az array elso elem sor1 tulajdonság ertekadása
         idoszak: "XI. század", //az array elso elem sor2 tulajdonság ertekadása
         tudos1: "Alhazen", //az array elso elem sor3 tulajdonság ertekadása
+    
     },
     { //array masodik elem létrehozása a masodiksor
         fizikaterulet: "Asztronómia", //az array masodik elem sor1 tulajdonság ertekadása
@@ -77,23 +78,17 @@ function tablegenerate() {
     
         const harmadiksor = document.createElement('td') //harmadiksor létrehozása
         harmadiksor.innerHTML = mostanielement.tudos1 //harmadiksor innerHTML-je a az array-ben a mostanielement (i)-nek a sor3.je
-        if (i === 0) { 
-            harmadiksor.colSpan = 2 // colSpan bellítása
-        }
-        if (!mostanielement.tudos2) {
-            harmadiksor.colSpan = 2 // ha nincs tudos2 akkor colspan 2
-        }
         sor.appendChild(harmadiksor) //hozzátesszük a sorhoz az elso oszlop harmadik elemjét 
         
-        if(harmadiksor.colSpan == 2) {
-
-        } else {
+        if (!mostanielement.tudos2) {
+            harmadiksor.colSpan = 2 // ha nincs tudos2 akkor colspan 2
+        }else {
             const negyediksor = document.createElement('td') //negyediksor létrehozása
             negyediksor.innerHTML = mostanielement.tudos2 //negyediksor innerHTML-je a az array-ben a mostanielement (i)-nek a sor4.je
-            sor.appendChild(negyediksor) //hozzátesszük a sorhoz az elso oszlop negyedik elemjét 
+              sor.appendChild(negyediksor) //hozzátesszük a sorhoz az elso oszlop negyedik elemjét 
+            
         }
-           
-    
+            
         tbody.appendChild(sor)
        
 }
