@@ -85,12 +85,15 @@ function tablegenerate() {
         }
         sor.appendChild(harmadiksor) //hozzátesszük a sorhoz az elso oszlop harmadik elemjét 
         
-        if( i > 0 ) { // ugye ha az első itrácion végig ment akkor már nyugodtan lehet negyedik sor
+        if(harmadiksor.colSpan == 2) {
+
+        } else {
             const negyediksor = document.createElement('td') //negyediksor létrehozása
             negyediksor.innerHTML = mostanielement.tudos2 //negyediksor innerHTML-je a az array-ben a mostanielement (i)-nek a sor4.je
             sor.appendChild(negyediksor) //hozzátesszük a sorhoz az elso oszlop negyedik elemjét 
-    
         }
+           
+    
         tbody.appendChild(sor)
        
 }
@@ -127,7 +130,7 @@ form.addEventListener('submit', function(e) {
         tudos2 : tudos2ertek // a tudos2-nek a tudos2ertek lesz az új értéke
         
     }
-
+  
 
     array.push(ujadat) //belerakjuk az arrayben ami ugye már létezik ezt az új létrehozott adatobjektumunkat.
 
