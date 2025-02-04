@@ -1,11 +1,11 @@
-const fejlec  = [
+const fejlec  = 
     //headerarray létrehozása
-    { //array első elem létrehozása a fejléc
-        elso: "Fizika terület", //az array elso elem fejlec1 tulajdonság ertekadása
-        masodik: "Időszak", //az array elso elem fejlec2 tulajdonság ertekadása
-        harmadik: "Képviselők", //az array elso elem fejlec3 tulajdonság ertekadása
-    },
-]
+    {
+        elso: "Fizika terület", //az objektum elso tulajdonság ertekadása
+        masodik: "Időszak", //az objektum  masodik tulajdonság ertekadása
+        harmadik: "Képviselők", //az objektum harmadik tulajdonság ertekadása
+    }
+
 
 const array = [ 
     { //array elso elem létrehozása az elsosor
@@ -46,13 +46,12 @@ header.appendChild(tr) //a tr-t hozzátesszük a headerünkhöz (thead)
 const tbody = document.createElement('tbody') //csinálunk egy tbodyt
 tablazat.appendChild(tbody) //a tbody-t pedig a táblázatunkhoz fűzünk.
 
-for (let adat in fejlec[0]) { // for ciklussal az adatokat nézzük a fejléc első eleméből
+for (let adat in fejlec) { // for ciklussal az az adatokat nézzük az objektumból
     const th = document.createElement('th'); // létrehozunk egy th elemet
-    th.innerHTML = fejlec[0][adat] // a th elem belső HTML-jét az aktuális adat értékére állítjuk
+    th.innerHTML = fejlec[adat]// a th elem belső HTML-jét az aktuális adat értékére állítjuk
     tr.appendChild(th); // hozzáadjuk a sorhoz
-
-    // Feltételezzük, hogy a fejlec[0] tartalmazza a fejlec3-at, amelyhez colSpan-t kell beállítani
-    if (adat === 'harmadik') { 
+    
+    if (adat === 'harmadik') {  //hogyha a adat a harmadik elem akkor legyen colspan 2
         th.colSpan = 2; // colSpan beállítása a th elemre
     }
 }
