@@ -50,7 +50,7 @@ for (let adat in fejlec) { // for ciklussal az az adatokat nézzük az objektumb
     const th = document.createElement('th'); // létrehozunk egy th elemet
     th.innerHTML = fejlec[adat]// a th elem belső HTML-jét az aktuális adat értékére állítjuk
     tr.appendChild(th); // hozzáadjuk a sorhoz
-    
+
     if (adat === 'harmadik') {  //hogyha a adat a harmadik elem akkor legyen colspan 2
         th.colSpan = 2; // colSpan beállítása a th elemre
     }
@@ -115,20 +115,80 @@ form.addEventListener('submit', function(e) {
 
     const tudos2ertek = tudos2.value//itt egy másik változóba belerakom az elöbb elkért tudos2 változó értékét
     
-    
+    let valid = true
 
-    const ujadat = { // egy uj objektumot hozunk létre 
-        fizikaterulet: teruletertek, // az uj fizikateruletnek a teruletertek lesz az értéke
-        idoszak : idoszakertek, // az idoszaknak az idoszakerteke lesz az értéke
-        tudos1 : tudos1ertek, // a tudos1-nek a tudos1ertek lesz az új értéke
-        tudos2 : tudos2ertek // a tudos2-nek a tudos2ertek lesz az új értéke
-        
+    if(!teruletertek || !idoszakertek) {
+        valid = false
+    }else {
+        valid = true
     }
-  
+
+    const form = e.currentTarget
+    const errorhtml = form.querySelectorAll('.error')
+    for(const errorelement of errorhtml){ 
+        errorelement.innerHTML = ''
+    }
+
+    if(teruletertek === "") {
+        const parentElement = terulet.parentElement; 
+        const errormsg = parentElement.querySelector('.error'); 
+        if(errormsg != undefined) {
+            errormsg.innerHTML = 'Terület megadasa kotelezo'; 
+        }
+    } 
+
+    if(idoszakertek === "") {
+        const parentElement = idoszak.parentElement; 
+        const errormsg = parentElement.querySelector('.error'); 
+    
+        if(errormsg != undefined) {
+            errormsg.innerHTML = 'Időszak megadasa kotelezo'; 
+            
+        } 
+    } 
+    
+    if(tudos1ertek === "") {
+        const parentElement = tudos1.parentElement; 
+        const errormsg = parentElement.querySelector('.error'); 
+    
+        if(errormsg != undefined) {
+            errormsg.innerHTML = 'Az első tudos megadasa kotelezo'; 
+            
+        } 
+    }
+    
+    if(tudos2ertek === "") {
+        const parentElement = tudos2.parentElement;  //a parentelement azért kell mert igy nézzük meg az adott divet amiben megkerssük az error classt
+        const errormsg = parentElement.querySelector('.error'); 
+    
+        if(errormsg != undefined) {
+            errormsg.innerHTML = 'A második tudos  megadasa kotelezo'; 
+            
+        } 
+    } 
+
+   
+
+    
+    form.reset()
+    if(valid) {
+        const ujadat = { // egy uj objektumot hozunk létre 
+            fizikaterulet: teruletertek, // az uj fizikateruletnek a teruletertek lesz az értéke
+            idoszak : idoszakertek, // az idoszaknak az idoszakerteke lesz az értéke
+            tudos1 : tudos1ertek, // a tudos1-nek a tudos1ertek lesz az új értéke
+            tudos2 : tudos2ertek // a tudos2-nek a tudos2ertek lesz az új értéke
+            
+        }
+    
+        
 
     array.push(ujadat) //belerakjuk az arrayben ami ugye már létezik ezt az új létrehozott adatobjektumunkat.
 
     tbody.innerHTML = "" //kitörlöm a táblázatot azért a tbodyt mert abban van igazából az egész táblázat a headerrel nem kell foglalkozni.
 
     tablegenerate() // és az ujonnan belerakott dologgal ujragenerálom a táblát.
+    }
+
+    
+
 })
