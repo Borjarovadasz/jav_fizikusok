@@ -115,38 +115,38 @@ form.addEventListener('submit', function(e) {
 
     const tudos2ertek = tudos2.value//itt egy másik változóba belerakom az elöbb elkért tudos2 változó értékét
     
-    let valid = true
+    let valid = true //csinálunk egy valid változot aminek true lesz az értéke
 
-    if(!teruletertek || !idoszakertek) {
-        valid = false
+    if(!teruletertek || !idoszakertek) { //hogy ha a teruletertek vagy az idoszakertek "" vagy undefined akkor a valid legyen false amúgy meg true
+        valid = false //legyen false
     }else {
-        valid = true
+        valid = true //legyen true
     }
 
-    const form = e.currentTarget
-    const errorhtml = form.querySelectorAll('.error')
-    for(const errorelement of errorhtml){ 
-        errorelement.innerHTML = ''
+    const form = e.currentTarget  
+    const errorhtml = form.querySelectorAll('.error') //a formon belül mindenet aminek error classal rendelkezik beletesszük egy változoba
+    for(const errorelement of errorhtml){  //minden egyes element ami ebben az errorhtml-ben van 
+        errorelement.innerHTML = '' //annak legyen az innerhtml-je üres string. (igy eltűnik majd a validácios szöveg ha tényleg irunk valamit)
     }
 
-    if(teruletertek === "") {
-        const parentElement = terulet.parentElement; 
-        const errormsg = parentElement.querySelector('.error'); 
-        if(errormsg != undefined) {
-            errormsg.innerHTML = 'Terület megadasa kotelezo'; 
+    if(teruletertek === "") { //ha a területérték megegyezik és egyelő típusú akkor
+        const parentElement = terulet.parentElement; // a terulet mezonek a  parentelementjét eltároljuk egy változóba
+        const errormsg = parentElement.querySelector('.error');  //majd ebben a parentelement div-ben megnézzük hogy van e class-al rendelkező elem
+        if(errormsg != undefined) { //ha van és undefined
+            errormsg.innerHTML = 'Terület megadasa kotelezo';  //akkor legyen az innerhtml-je ez
         }
     } 
 
-    if(idoszakertek === "") {
-        const parentElement = idoszak.parentElement; 
-        const errormsg = parentElement.querySelector('.error'); 
+    if(idoszakertek === "") { //ha az időszakertek megegyezik és egyelő típusú akkor
+        const parentElement = idoszak.parentElement; // a idoszak mezonek a parentelementjét eltároljuk egy változóba
+        const errormsg = parentElement.querySelector('.error'); //majd ebben a parentelement div-ben megnézzük hogy van e class-al rendelkező elem
     
-        if(errormsg != undefined) {
-            errormsg.innerHTML = 'Időszak megadasa kotelezo'; 
+        if(errormsg != undefined) { //ha van és undefined
+            errormsg.innerHTML = 'Időszak megadasa kotelezo'; //akkor legyen az innerhtml-je ez
             
         } 
     } 
-    
+
     if(tudos1ertek === "") {
         const parentElement = tudos1.parentElement; 
         const errormsg = parentElement.querySelector('.error'); 
