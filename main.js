@@ -111,13 +111,13 @@ form.addEventListener('submit', function(e) {
 
     const idoszakertek = idoszak.value //itt egy másik változóba belerakom az elöbb elkért idoszak változó értékét
 
-    const tudos1ertek = tudos1.value //itt egy másik változóba belerakom az elöbb elkért tudos1 változó értékét
+    let tudos1ertek = tudos1.value //itt egy másik változóba belerakom az elöbb elkért tudos1 változó értékét
 
-    const tudos2ertek = tudos2.value//itt egy másik változóba belerakom az elöbb elkért tudos2 változó értékét
+    let tudos2ertek = tudos2.value//itt egy másik változóba belerakom az elöbb elkért tudos2 változó értékét
     
     let valid = true //csinálunk egy valid változot aminek true lesz az értéke
 
-    if(!teruletertek || !idoszakertek) { //hogy ha a teruletertek vagy az idoszakertek "" vagy undefined akkor a valid legyen false amúgy meg true
+    if(!teruletertek || !idoszakertek || !tudos1ertek && !tudos2ertek) { //hogy ha a teruletertek vagy az idoszakertek "" vagy undefined akkor a valid legyen false amúgy meg true
         valid = false //legyen false
     }else {
         valid = true //legyen true
@@ -129,7 +129,7 @@ form.addEventListener('submit', function(e) {
         errorelement.innerHTML = '' //annak legyen az innerhtml-je üres string. (igy eltűnik majd a validácios szöveg ha tényleg irunk valamit)
     }
 
-    if(teruletertek === "") { //ha a területérték megegyezik és egyelő típusú akkor
+    if(!teruletertek) { //ha a területérték megegyezik és egyelő típusú akkor
         const parentElement = terulet.parentElement; // a terulet mezonek a  parentelementjét eltároljuk egy változóba
         const errormsg = parentElement.querySelector('.error');  //majd ebben a parentelement div-ben megnézzük hogy van e class-al rendelkező elem
         if(errormsg != undefined) { //ha van és undefined
@@ -137,7 +137,7 @@ form.addEventListener('submit', function(e) {
         }
     } 
 
-    if(idoszakertek === "") { //ha az időszakertek megegyezik és egyelő típusú akkor
+    if(!idoszakertek) { //ha az időszakertek megegyezik és egyelő típusú akkor
         const parentElement = idoszak.parentElement; // a idoszak mezonek a parentelementjét eltároljuk egy változóba
         const errormsg = parentElement.querySelector('.error'); //majd ebben a parentelement div-ben megnézzük hogy van e class-al rendelkező elem
     
@@ -147,27 +147,26 @@ form.addEventListener('submit', function(e) {
         } 
     } 
 
-    if(tudos1ertek === "") {
-        const parentElement = tudos1.parentElement; 
-        const errormsg = parentElement.querySelector('.error'); 
+
     
-        if(errormsg != undefined) {
-            errormsg.innerHTML = 'Az első tudos megadasa kotelezo'; 
-            
+    if(!tudos1ertek && !tudos2ertek ) { //ha a tudosérték1 undefined vagy "" és a tudos2érték is akkor
+        const parentElement1 = tudos1.parentElement; // a tudos1 mezonek a  parentelementjét eltároljuk egy változóba
+        const parentElement2 = tudos2.parentElement;  // a tudos2 mezonek a  parentelementjét eltároljuk egy változóba
+        const errormsg = parentElement1.querySelector('.error'); //majd ebben a parentelement div-ben megnézzük hogy van e class-al rendelkező elem
+        const errormsg2 = parentElement2.querySelector('.error'); //majd ebben a parentelement div-ben megnézzük hogy van e class-al rendelkező elem
+    
+        if(errormsg != undefined) { //ha van és undefined
+            errormsg.innerHTML = 'Legalább egy tudos megadása kötelező!';  //akkor legyen az innerhtml-je ez
+            errormsg2.innerHTML = 'Legalább egy tudos megadása kötelező!';   //akkor legyen az innerhtml-je ez
         } 
     }
-    
-    if(tudos2ertek === "") {
-        const parentElement = tudos2.parentElement;  //a parentelement azért kell mert igy nézzük meg az adott divet amiben megkerssük az error classt
-        const errormsg = parentElement.querySelector('.error'); 
-    
-        if(errormsg != undefined) {
-            errormsg.innerHTML = 'A második tudos  megadasa kotelezo'; 
-            
-        } 
-    } 
-
-   
+  
+    if(!tudos1ertek && tudos2ertek) { //ha a tudos1ertek undefined és "" és a tudos2ertek létezik. akkor
+        let ujtudos1 = tudos2ertek //csinálunk egy let változót és belerakjuk a tudos2erteket
+        tudos1ertek = ujtudos1 //tudos1ertek ami ugye üres abba belerakjuk a tudos2erteket
+        tudos2ertek = "" //majd nullázzuk a tudos2erteket hogy az ne irodjon ki 
+       
+    }
 
     
     form.reset()
