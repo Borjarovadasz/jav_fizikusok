@@ -60,7 +60,6 @@ for (let adat in fejlec) { // for ciklussal az az adatokat nézzük az objektumb
 
 function tablegenerate() {
 
-    
     for(let i = 0; i < array.length; i++ ) { //végigiterálok egy for ciklussal az array-en
         const mostanielement = array[i]  //az i-dik element a mostanielement lesz
         const sor = document.createElement('tr') // csinálok egy sort
@@ -108,7 +107,7 @@ form.addEventListener('submit', function(e) {
     
     
     const teruletertek = terulet.value //itt egy másik változóba belerakom az elöbb elkért terulet változó értékét
-
+    console.log(teruletertek)
     const idoszakertek = idoszak.value //itt egy másik változóba belerakom az elöbb elkért idoszak változó értékét
 
     let tudos1ertek = tudos1.value //itt egy másik változóba belerakom az elöbb elkért tudos1 változó értékét
@@ -129,25 +128,22 @@ form.addEventListener('submit', function(e) {
         errorelement.innerHTML = '' //annak legyen az innerhtml-je üres string. (igy eltűnik majd a validácios szöveg ha tényleg irunk valamit)
     }
 
-    if(!teruletertek) { //ha a területérték megegyezik és egyelő típusú akkor
-        const parentElement = terulet.parentElement; // a terulet mezonek a  parentelementjét eltároljuk egy változóba
-        const errormsg = parentElement.querySelector('.error');  //majd ebben a parentelement div-ben megnézzük hogy van e class-al rendelkező elem
-        if(errormsg != undefined) { //ha van és undefined
-            errormsg.innerHTML = 'Terület megadasa kotelezo';  //akkor legyen az innerhtml-je ez
-        }
-    } 
-
-    if(!idoszakertek) { //ha az időszakertek megegyezik és egyelő típusú akkor
-        const parentElement = idoszak.parentElement; // a idoszak mezonek a parentelementjét eltároljuk egy változóba
+    function teridocheck(idoszakertek, teruletertek) {
+       if(!idoszakertek || !teruletertek) {
+        const parentElement = terulet.parentElement; // a idoszak mezonek a parentelementjét eltároljuk egy változóba
+        const parentElement1 = idoszak.parentElement; // a idoszak mezonek a parentelementjét eltároljuk egy változóba
         const errormsg = parentElement.querySelector('.error'); //majd ebben a parentelement div-ben megnézzük hogy van e class-al rendelkező elem
+        const errormsg1 = parentElement1.querySelector('.error'); //majd ebben a parentelement div-ben megnézzük hogy van e class-al rendelkező elem
     
-        if(errormsg != undefined) { //ha van és undefined
-            errormsg.innerHTML = 'Időszak megadasa kotelezo'; //akkor legyen az innerhtml-je ez
+        if(errormsg && errormsg1) { //ha van és undefined
+            errormsg.innerHTML = 'Terület megadasa kotelezo'; //akkor legyen az innerhtml-je ez
+            errormsg1.innerHTML = 'Időszak megadasa kotelezo'; //akkor legyen az innerhtml-je ez
             
         } 
-    } 
-
-
+        
+       }
+    }
+    teridocheck()
     
     if(!tudos1ertek && !tudos2ertek ) { //ha a tudosérték1 undefined vagy "" és a tudos2érték is akkor
         const parentElement1 = tudos1.parentElement; // a tudos1 mezonek a  parentelementjét eltároljuk egy változóba
@@ -162,11 +158,12 @@ form.addEventListener('submit', function(e) {
     }
   
     if(!tudos1ertek && tudos2ertek) { //ha a tudos1ertek undefined és "" és a tudos2ertek létezik. akkor
-        let ujtudos1 = tudos2ertek //csinálunk egy let változót és belerakjuk a tudos2erteket
-        tudos1ertek = ujtudos1 //tudos1ertek ami ugye üres abba belerakjuk a tudos2erteket
+        tudos1ertek = tudos2ertek //tudos1ertek ami ugye üres abba belerakjuk a tudos2erteket
         tudos2ertek = "" //majd nullázzuk a tudos2erteket hogy az ne irodjon ki 
        
     }
+
+
 
     
     form.reset()
@@ -184,7 +181,7 @@ form.addEventListener('submit', function(e) {
     array.push(ujadat) //belerakjuk az arrayben ami ugye már létezik ezt az új létrehozott adatobjektumunkat.
 
     tbody.innerHTML = "" //kitörlöm a táblázatot azért a tbodyt mert abban van igazából az egész táblázat a headerrel nem kell foglalkozni.
-
+    
     tablegenerate() // és az ujonnan belerakott dologgal ujragenerálom a táblát.
     }
 
