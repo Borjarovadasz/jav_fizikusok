@@ -128,19 +128,17 @@ form.addEventListener('submit', function(e) {
     for(const errorelement of errorhtml){  //minden egyes element ami ebben az errorhtml-ben van 
         errorelement.innerHTML = '' //annak legyen az innerhtml-je üres string. (igy eltűnik majd a validácios szöveg ha tényleg irunk valamit)
     }    
-    teridocheck(idoszak, "Kötelező időszakot megadni", "")
-    teridocheck(terulet, "Kötelező területet megadni", "")
+    teridocheck(idoszak, "Kötelező időszakot megadni") //meghívjuk a teridochecket és hogy a függvénynek milyen bemeneti paraméterei lesznek
+    teridocheck(terulet, "Kötelező területet megadni") //meghívjuk a teridochecket és hogy a függvénynek milyen bemeneti paraméterei lesznek
 
-    tudoscheck(tudos1, "Legalább egy tudos megadása kötelező!", tudos2)
-    tudoscheck(tudos2, "Legalább egy tudos megadása kötelező!", tudos1)
+    tudoscheck(tudos1, "Legalább egy tudos megadása kötelező!", tudos2) //meghívjuk a tudoschecket és hogy a függvénynek milyen bemeneti paraméterei lesznek
+    tudoscheck(tudos2, "Legalább egy tudos megadása kötelező!", tudos1) //meghívjuk a tudoschecket és hogy a függvénynek milyen bemeneti paraméterei lesznek
   
     if(!tudos1ertek && tudos2ertek) { //ha a tudos1ertek undefined és "" és a tudos2ertek létezik. akkor
         tudos1ertek = tudos2ertek //tudos1ertek ami ugye üres abba belerakjuk a tudos2erteket
         tudos2ertek = "" //majd nullázzuk a tudos2erteket hogy az ne irodjon ki 
        
     }
-
-
     
     form.reset()
     if(valid) {
@@ -159,21 +157,29 @@ form.addEventListener('submit', function(e) {
     tablegenerate() // és az ujonnan belerakott dologgal ujragenerálom a táblát.
     }
 
-    function teridocheck(ertek, uzenet, masik) {
-        if (!ertek.value) {
-            const parentElement = ertek.parentElement;
-            const errormsg = parentElement.querySelector('.error');
-            if (errormsg) {
-                errormsg.innerHTML = uzenet;
-            }
-            if(masik.value) {
-                errormsg.innerHTML = ""
+   
+})
+
+function teridocheck(ertek, uzenet) { // teridocheck függvény aminek a bemeneti paraméteri ertek és uzenet
+    if (!ertek.value) { // ha az érték nek a tulajdonsága undefined vagy "" 
+        const parentElement = ertek.parentElement; //akkor létrehozunk egy parentelement változot és eltároljuk a bejővő értéknek a parentelementjét
+        const errormsg = parentElement.querySelector('.error'); //majd egy errormsg változóban a bejövő értéknek parentelementjében megkeressük az első error classal rendekező dolgot.
+        if (errormsg) { //ha az errormsg van akkor 
+            errormsg.innerHTML = uzenet; //legyen a megadott uzenetünk az
         }
     }
 }
-        function tudoscheck(ertek, uzenet, masik) {  
-            teridocheck(ertek, uzenet, masik)
-    
+
+    function tudoscheck(ertek, uzenet, masik) { //tudoscheck függvény aminek a bemeneti paraméteri ertek, uzenet és másik
+        if (!ertek.value) {  // ha az érték nek a tulajdonsága undefined vagy "" 
+            const parentElement = ertek.parentElement; //akkor létrehozunk egy parentelement változot és eltároljuk a bejővő értéknek a parentelementjét
+            const errormsg = parentElement.querySelector('.error');  //majd egy errormsg változóban a bejövő értéknek parentelementjében megkeressük az első error classal rendekező dolgot.
+            if (errormsg) { //ha az errormsg van akkor 
+                errormsg.innerHTML = uzenet; //legyen a megadott uzenetünk az
+        
+            } if(masik.value) { //ha van a másik valueja szóval nem undefined vagy ""
+                errormsg.innerHTML = "" //akkor viszont legyen a másiknak az errorja üres mivel csak egy tudost akarunk
+            }
         }
-})
+        }
 
