@@ -1,13 +1,13 @@
 const fejlec  = 
     [
         {
-            elso: "Fizika terület"
+            szoveg: "Fizika terület"
         },
         {
-            masodik: "Időszak"
+            szoveg: "Időszak"
         },
         {
-            harmadik: "Képviselők", colSpan: 2
+            szoveg: "Képviselők", colSpan: 2
         }
     ]
     
@@ -54,15 +54,11 @@ tablazat.appendChild(tbody) //a tbody-t pedig a táblázatunkhoz fűzünk.
 const th = document.createElement('th')
 
 function headergen(sor,fejlecobjk){
-    for (const adat in fejlecobjk) { // for ciklussal az az adatokat nézzük az objektumból
+    for (const adat of fejlecobjk) { // for ciklussal az az adatokat nézzük az objektumból
         const cella = document.createElement('th')
-        cella.innerHTML = adat// a th elem belső HTML-jét az aktuális adat értékére állítjuk
+        cella.innerHTML = adat.szoveg// a th elem belső HTML-jét az aktuális adat értékére állítjuk
     
         sor.appendChild(cella); // hozzáadjuk a sorhoz
-    
-        if (adat === 'harmadik') {  //hogyha a adat a harmadik elem akkor legyen colspan 2
-            cella.colSpan = 2; // colSpan beállítása a th elemre
-        }
      
     }
 }
