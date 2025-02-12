@@ -1,10 +1,16 @@
 const fejlec  = 
-    //headerarray létrehozása
-    {
-        elso: "Fizika terület", //az objektum elso tulajdonság ertekadása
-        masodik: "Időszak", //az objektum  masodik tulajdonság ertekadása
-        harmadik: "Képviselők", //az objektum harmadik tulajdonság ertekadása
-    }
+    [
+        {
+            elso: "Fizika terület"
+        },
+        {
+            masodik: "Időszak"
+        },
+        {
+            harmadik: "Képviselők", colSpan: 2
+        }
+    ]
+    
 
 
 const array = [ 
@@ -45,17 +51,22 @@ const tr = document.createElement('tr') //létrehozunk egy tr-sort
 header.appendChild(tr) //a tr-t hozzátesszük a headerünkhöz (thead)
 const tbody = document.createElement('tbody') //csinálunk egy tbodyt
 tablazat.appendChild(tbody) //a tbody-t pedig a táblázatunkhoz fűzünk.
+const th = document.createElement('th')
 
-for (let adat in fejlec) { // for ciklussal az az adatokat nézzük az objektumból
-    const th = document.createElement('th'); // létrehozunk egy th elemet
-    th.innerHTML = fejlec[adat]// a th elem belső HTML-jét az aktuális adat értékére állítjuk
-    tr.appendChild(th); // hozzáadjuk a sorhoz
-
-    if (adat === 'harmadik') {  //hogyha a adat a harmadik elem akkor legyen colspan 2
-        th.colSpan = 2; // colSpan beállítása a th elemre
+function headergen(sor,fejlecobjk){
+    for (const adat in fejlecobjk) { // for ciklussal az az adatokat nézzük az objektumból
+        const cella = document.createElement('th')
+        cella.innerHTML = adat// a th elem belső HTML-jét az aktuális adat értékére állítjuk
+    
+        sor.appendChild(cella); // hozzáadjuk a sorhoz
+    
+        if (adat === 'harmadik') {  //hogyha a adat a harmadik elem akkor legyen colspan 2
+            cella.colSpan = 2; // colSpan beállítása a th elemre
+        }
+     
     }
 }
-
+headergen(tr,fejlec)
 
 
 function tablegenerate() {
