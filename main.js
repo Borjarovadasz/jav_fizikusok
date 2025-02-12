@@ -127,30 +127,18 @@ form.addEventListener('submit', function(e) {
     const errorhtml = form.querySelectorAll('.error') //a formon belül mindenet aminek error classal rendelkezik beletesszük egy változoba
     for(const errorelement of errorhtml){  //minden egyes element ami ebben az errorhtml-ben van 
         errorelement.innerHTML = '' //annak legyen az innerhtml-je üres string. (igy eltűnik majd a validácios szöveg ha tényleg irunk valamit)
-    }
-
-    
+    }    
     teridocheck(idoszak, "Kötelező időszakot megadni")
     teridocheck(terulet, "Kötelező területet megadni")
-    
-    if(!tudos1ertek && !tudos2ertek ) { //ha a tudosérték1 undefined vagy "" és a tudos2érték is akkor
-        const parentElement1 = tudos1.parentElement; // a tudos1 mezonek a  parentelementjét eltároljuk egy változóba
-        const parentElement2 = tudos2.parentElement;  // a tudos2 mezonek a  parentelementjét eltároljuk egy változóba
-        const errormsg = parentElement1.querySelector('.error'); //majd ebben a parentelement div-ben megnézzük hogy van e class-al rendelkező elem
-        const errormsg2 = parentElement2.querySelector('.error'); //majd ebben a parentelement div-ben megnézzük hogy van e class-al rendelkező elem
-    
-        if(errormsg != undefined) { //ha van és undefined
-            errormsg.innerHTML = 'Legalább egy tudos megadása kötelező!';  //akkor legyen az innerhtml-je ez
-            errormsg2.innerHTML = 'Legalább egy tudos megadása kötelező!';   //akkor legyen az innerhtml-je ez
-        } 
-    }
+
+    tudoscheck(tudos1, "Legalább egy tudos megadása kötelező!", tudos2)
+    tudoscheck(tudos2, "Legalább egy tudos megadása kötelező!", tudos1)
   
     if(!tudos1ertek && tudos2ertek) { //ha a tudos1ertek undefined és "" és a tudos2ertek létezik. akkor
         tudos1ertek = tudos2ertek //tudos1ertek ami ugye üres abba belerakjuk a tudos2erteket
         tudos2ertek = "" //majd nullázzuk a tudos2erteket hogy az ne irodjon ki 
        
     }
-
 
 
     
@@ -164,8 +152,6 @@ form.addEventListener('submit', function(e) {
             
         }
     
-        
-
     array.push(ujadat) //belerakjuk az arrayben ami ugye már létezik ezt az új létrehozott adatobjektumunkat.
 
     tbody.innerHTML = "" //kitörlöm a táblázatot azért a tbodyt mert abban van igazából az egész táblázat a headerrel nem kell foglalkozni.
@@ -179,6 +165,18 @@ form.addEventListener('submit', function(e) {
             const errormsg = parentElement.querySelector('.error');
             if (errormsg) {
                 errormsg.innerHTML = uzenet;
+            }
+        }
+    }
+    function tudoscheck(ertek, uzenet, masik) {
+        if (!ertek.value) {
+            const parentElement = ertek.parentElement;
+            const errormsg = parentElement.querySelector('.error');
+            if (errormsg) {
+                errormsg.innerHTML = uzenet;
+        
+            } if(masik.value) {
+                errormsg.innerHTML = ""
             }
         }
     }
