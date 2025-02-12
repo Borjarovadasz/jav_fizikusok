@@ -130,7 +130,8 @@ form.addEventListener('submit', function(e) {
     }
 
     
-    teridocheck(teruletertek,idoszakertek)
+    teridocheck(idoszak, "Kötelező időszakot megadni")
+    teridocheck(terulet, "Kötelező területet megadni")
     
     if(!tudos1ertek && !tudos2ertek ) { //ha a tudosérték1 undefined vagy "" és a tudos2érték is akkor
         const parentElement1 = tudos1.parentElement; // a tudos1 mezonek a  parentelementjét eltároljuk egy változóba
@@ -172,22 +173,15 @@ form.addEventListener('submit', function(e) {
     tablegenerate() // és az ujonnan belerakott dologgal ujragenerálom a táblát.
     }
 
-    function teridocheck() {
-        if(!idoszakertek) {
-         const parentElement = idoszak.parentElement; // a idoszak mezonek a parentelementjét eltároljuk egy változóba
-         const errormsg = parentElement.querySelector('.error'); //majd ebben a parentelement div-ben megnézzük hogy van e class-al rendelkező elem
-         if(errormsg != undefined) {
-            errormsg.innerHTML = "Idő megadása kötelező"
-         }
-        }
-        if(!teruletertek) {
-            const parentElement1 = terulet.parentElement; // a idoszak mezonek a parentelementjét eltároljuk egy változóba
-            const errormsg1 = parentElement1.querySelector('.error'); //majd ebben a parentelement div-ben megnézzük hogy van e class-al rendelkező elem
-            if(!errormsg1 != undefined) {
-                errormsg1.innerHTML = "Terület megadása kötelező"
+    function teridocheck(ertek, uzenet) {
+        if (!ertek.value) {
+            const parentElement = ertek.parentElement;
+            const errormsg = parentElement.querySelector('.error');
+            if (errormsg) {
+                errormsg.innerHTML = uzenet;
             }
-        
         }
-}
+    }
+
 })
 
