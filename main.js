@@ -128,8 +128,8 @@ form.addEventListener('submit', function(e) {
     for(const errorelement of errorhtml){  //minden egyes element ami ebben az errorhtml-ben van 
         errorelement.innerHTML = '' //annak legyen az innerhtml-je üres string. (igy eltűnik majd a validácios szöveg ha tényleg irunk valamit)
     }    
-    teridocheck(idoszak, "Kötelező időszakot megadni")
-    teridocheck(terulet, "Kötelező területet megadni")
+    teridocheck(idoszak, "Kötelező időszakot megadni", "")
+    teridocheck(terulet, "Kötelező területet megadni", "")
 
     tudoscheck(tudos1, "Legalább egy tudos megadása kötelező!", tudos2)
     tudoscheck(tudos2, "Legalább egy tudos megadása kötelező!", tudos1)
@@ -159,27 +159,21 @@ form.addEventListener('submit', function(e) {
     tablegenerate() // és az ujonnan belerakott dologgal ujragenerálom a táblát.
     }
 
-    function teridocheck(ertek, uzenet) {
+    function teridocheck(ertek, uzenet, masik) {
         if (!ertek.value) {
             const parentElement = ertek.parentElement;
             const errormsg = parentElement.querySelector('.error');
             if (errormsg) {
                 errormsg.innerHTML = uzenet;
             }
-        }
-    }
-    function tudoscheck(ertek, uzenet, masik) {
-        if (!ertek.value) {
-            const parentElement = ertek.parentElement;
-            const errormsg = parentElement.querySelector('.error');
-            if (errormsg) {
-                errormsg.innerHTML = uzenet;
-        
-            } if(masik.value) {
+            if(masik.value) {
                 errormsg.innerHTML = ""
-            }
         }
     }
-
+}
+        function tudoscheck(ertek, uzenet, masik) {  
+            teridocheck(ertek, uzenet, masik)
+    
+        }
 })
 
