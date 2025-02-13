@@ -68,12 +68,12 @@ function headergen(sor,fejlecobjk){
 headergen(tr,fejlec)
 
 
-function tablegenerate(tomb) {
+function tablegenerate(tomb,tbody) {
 
     for(data of tomb) { //végigiterálok egy for ciklussal az array-en
         const sor = document.createElement('tr') // csinálok egy sort
     
-        tablazat.appendChild(sor) //a fő táblázathoz hozzácsatolom a sort
+        tbody.appendChild(sor) //a fő táblázathoz hozzácsatolom a sort
     
         const elsosor = document.createElement('td') //elsosor létrehozása
         elsosor.innerHTML = data.fizikaterulet //elsosor innerHTML-je a az array-ben a mostanielement (i)-nek a sor1.je
@@ -103,7 +103,7 @@ function tablegenerate(tomb) {
 }
 
 
-tablegenerate(array)
+tablegenerate(array,tbody)
 
 const form = document.getElementById('form') // megszerezzük az id alapján a formot
 
