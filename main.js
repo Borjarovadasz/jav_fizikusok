@@ -68,31 +68,30 @@ function headergen(sor,fejlecobjk){
 headergen(tr,fejlec)
 
 
-function tablegenerate() {
+function tablegenerate(tomb) {
 
-    for(let i = 0; i < array.length; i++ ) { //végigiterálok egy for ciklussal az array-en
-        const mostanielement = array[i]  //az i-dik element a mostanielement lesz
+    for(data of tomb) { //végigiterálok egy for ciklussal az array-en
         const sor = document.createElement('tr') // csinálok egy sort
     
         tablazat.appendChild(sor) //a fő táblázathoz hozzácsatolom a sort
     
         const elsosor = document.createElement('td') //elsosor létrehozása
-        elsosor.innerHTML = mostanielement.fizikaterulet //elsosor innerHTML-je a az array-ben a mostanielement (i)-nek a sor1.je
+        elsosor.innerHTML = data.fizikaterulet //elsosor innerHTML-je a az array-ben a mostanielement (i)-nek a sor1.je
         sor.appendChild(elsosor) //hozzátesszük a sorhoz az elso oszlop elso elemjét 
     
         const masodiksor = document.createElement('td') //masodiksor létrehozása
-        masodiksor.innerHTML = mostanielement.idoszak //masodiksor innerHTML-je a az array-ben a mostanielement (i)-nek a sor2.je
+        masodiksor.innerHTML = data.idoszak //masodiksor innerHTML-je a az array-ben a mostanielement (i)-nek a sor2.je
         sor.appendChild(masodiksor) //hozzátesszük a sorhoz az elso oszlop masodik elemjét 
     
         const harmadiksor = document.createElement('td') //harmadiksor létrehozása
-        harmadiksor.innerHTML = mostanielement.tudos1 //harmadiksor innerHTML-je a az array-ben a mostanielement (i)-nek a sor3.je
+        harmadiksor.innerHTML = data.tudos1 //harmadiksor innerHTML-je a az array-ben a mostanielement (i)-nek a sor3.je
         sor.appendChild(harmadiksor) //hozzátesszük a sorhoz az elso oszlop harmadik elemjét 
         
-        if (!mostanielement.tudos2) {
+        if (!data.tudos2) {
             harmadiksor.colSpan = 2 // ha nincs tudos2 akkor colspan 2
         }else {
             const negyediksor = document.createElement('td') //negyediksor létrehozása
-            negyediksor.innerHTML = mostanielement.tudos2 //negyediksor innerHTML-je a az array-ben a mostanielement (i)-nek a sor4.je
+            negyediksor.innerHTML = data.tudos2 //negyediksor innerHTML-je a az array-ben a mostanielement (i)-nek a sor4.je
               sor.appendChild(negyediksor) //hozzátesszük a sorhoz az elso oszlop negyedik elemjét 
             
         }
@@ -104,7 +103,7 @@ function tablegenerate() {
 }
 
 
-tablegenerate()
+tablegenerate(array)
 
 const form = document.getElementById('form') // megszerezzük az id alapján a formot
 
