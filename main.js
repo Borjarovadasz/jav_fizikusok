@@ -10,7 +10,29 @@ const fejlec  =
             szoveg: "Képviselők", colSpan: 2
         }
     ]
-    
+
+    const form1 = [
+        {
+            label: "Terület megnevezése",
+            id: "fizika",
+            for:"fizika"
+        },
+        {
+            label: "Időszak",
+            id: "ido",
+            for:"ido"
+        },
+        {
+            label: "Első Tudos:",
+            id: "tudos1",
+            for:"tudos1"
+        },
+        {
+            label: "Második Tudos:",
+            id: "tudos2",
+            for:"tudos1"
+        }
+    ]
 
 
 const array = [ 
@@ -43,6 +65,45 @@ const array = [
     
 ]
 
+function formgenerate() {
+    const form = document.createElement('form')
+    form.id = "form"
+   for(let i = 0; i < form1.length; i++) {
+        const div = document.createElement('div')
+        const label = document.createElement('label')
+        label.htmlFor  = form1[i].for
+        label.innerHTML = form1[i].label
+
+        const input = document.createElement('input')
+        input.type = 'text'
+        input.id = form1[i].id
+        input.name = form1[i].id
+
+        const br = document.createElement('br') 
+
+        div.appendChild(label)
+        div.appendChild(br)
+        div.appendChild(input)
+        
+        
+        const errordiv = document.createElement('div')
+        errordiv.className = 'error'
+        div.appendChild(errordiv)
+
+ 
+       
+        form.appendChild(div)
+       
+    
+   }
+   const button = document.createElement('button')
+   button.innerHTML = "Hozzáadás"
+   document.body.appendChild(form)
+   form.appendChild(button)
+}
+
+formgenerate()
+
 const tablazat = document.createElement('table') // Létrehozzuk a táblázat változo
 document.body.appendChild(tablazat) // hozzá appendáljuk a táblázatot a bodyhoz
 const header = document.createElement('thead') // létrehozunk egy thead-et
@@ -66,6 +127,8 @@ function headergen(sor,fejlecobjk){
     }
 }
 headergen(tr,fejlec)
+
+
 
 
 function tablegenerate(tomb,tbody) {
@@ -163,7 +226,7 @@ form.addEventListener('submit', function(e) {
 
     tbody.innerHTML = "" //kitörlöm a táblázatot azért a tbodyt mert abban van igazából az egész táblázat a headerrel nem kell foglalkozni.
     
-    tablegenerate() // és az ujonnan belerakott dologgal ujragenerálom a táblát.
+    tablegenerate(array,tbody) // és az ujonnan belerakott dologgal ujragenerálom a táblát.
     }
 
    
