@@ -64,7 +64,10 @@ const array = [
     },
     
 ]
-
+/**
+ * Ez a függvény egy array-ból generál le egy formot, a bemeneti paraméter pedig egy array.
+ * @param {array} arrayform 
+ */
 function formgenerate(arrayform) { //formgenerate függvény létrehozása
     const form = document.createElement('form') //csinálom egy form változó alatt egy formot
     form.id = "form" // a form id-je legyen form
@@ -114,6 +117,13 @@ const tbody = document.createElement('tbody') //csinálunk egy tbodyt
 tablazat.appendChild(tbody) //a tbody-t pedig a táblázatunkhoz fűzünk.
 const th = document.createElement('th')
 
+/**
+ * Ez a header az az a fejlécgenerátor függvény aminek két bemeneti paramétere van. Az egyik az maga az objektum
+ * amiből majd generálja a fejlécet. A másik pedig Egy HTMLElement ami esetünkben az a tr amit elöbb a kódban 
+ * létrehoztunk és ahhoz appendeljük hozzá.
+ * @param {HTMLTableRowElement} sor 
+ * @param {object} fejlecobjk 
+ */
 function headergen(sor,fejlecobjk){
     for (const adat of fejlecobjk) { // for ciklussal az az adatokat nézzük az objektumból
         const cella = document.createElement('th')
@@ -130,7 +140,14 @@ headergen(tr,fejlec)
 
 
 
-
+/**
+ * Ez a tablegenerate tömb amivel generáljuk a táblát. Bemeneti paraméteri egy tomb és az a tbody amihez majd appendáljuk
+ *a sorokot és a cellákat. Ez a tbodyt már létrehoztuk a kódban az elején.
+  A függvényen belül csinálunk sorokat a sorokhoz cellákat amiknek az értékeit az array-ből vesszük ki.
+ * @param {array} tomb 
+ * @param {HTMLTableSectionElement} tbody 
+ *
+ */
 function tablegenerate(tomb,tbody) {
 
     for(data of tomb) { //végigiterálok egy for ciklussal az array-en
@@ -169,6 +186,7 @@ function tablegenerate(tomb,tbody) {
 tablegenerate(array,tbody)
 
 const form = document.getElementById('form') // megszerezzük az id alapján a formot
+
 
 form.addEventListener('submit', function(e) {
 
@@ -232,6 +250,13 @@ form.addEventListener('submit', function(e) {
    
 })
 
+/**Ez a teridocheck függvény, ami megnézi hogy a felhasználi írt e be a formba időt vagy területet. Ha nem írt akkor az 
+ * adott alá írjuk hogy kötelező
+ * 
+ * @param {HTMLElement} ertek 
+ * @param {string} uzenet 
+ */
+
 function teridocheck(ertek, uzenet) { // teridocheck függvény aminek a bemeneti paraméteri ertek és uzenet
     if (!ertek.value) { // ha az érték nek a tulajdonsága undefined vagy "" 
         const parentElement = ertek.parentElement; //akkor létrehozunk egy parentelement változot és eltároljuk a bejővő értéknek a parentelementjét
@@ -242,6 +267,13 @@ function teridocheck(ertek, uzenet) { // teridocheck függvény aminek a bemenet
     }
 }
 
+/**Hasonló történik itt is ha nem írt egyik tudos mezőben a formban akkor írjuk ki a szöveget. Ha csak az egyikbe írt 
+ * az már nekünk elég lesz.
+ * 
+ * @param {HTMLElement} ertek 
+ * @param {string} uzenet 
+ * @param {HTMLElement} masik 
+ */
     function tudoscheck(ertek, uzenet, masik) { //tudoscheck függvény aminek a bemeneti paraméteri ertek, uzenet és másik
         if (!ertek.value) {  // ha az érték nek a tulajdonsága undefined vagy "" 
             const parentElement = ertek.parentElement; //akkor létrehozunk egy parentelement változot és eltároljuk a bejővő értéknek a parentelementjét
