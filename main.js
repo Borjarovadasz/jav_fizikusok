@@ -65,19 +65,19 @@ const array = [
     
 ]
 
-function formgenerate() { //formgenerate függvény létrehozása
+function formgenerate(arrayform) { //formgenerate függvény létrehozása
     const form = document.createElement('form') //csinálom egy form változó alatt egy formot
     form.id = "form" // a form id-je legyen form
-   for(let i = 0; i < form1.length; i++) { //végig iterálunk a form1 arrayünkön
+   for(let i = 0; i < arrayform.length; i++) { //végig iterálunk a form1 arrayünkön
         const div = document.createElement('div') //csinálunk egy div-et div névvel
         const label = document.createElement('label') //csinálunk egy labelt-
-        label.htmlFor  = form1[i].for //a label-nek a "fos"-os tulajdonság értéke az legyen mindig az adott ciklus i-nek az arrayben a "for"-hoz hozzákapcsolt érték.
-        label.innerHTML = form1[i].label //a label-nek legyen az innerhtml-je az adott ciklis i-nek az arrayban a "label"-hez kapcsolt érték.
+        label.htmlFor  = arrayform[i].for //a label-nek a "fos"-os tulajdonság értéke az legyen mindig az adott ciklus i-nek az arrayben a "for"-hoz hozzákapcsolt érték.
+        label.innerHTML = arrayform[i].label //a label-nek legyen az innerhtml-je az adott ciklis i-nek az arrayban a "label"-hez kapcsolt érték.
 
         const input = document.createElement('input') //csinálunk egy inputot
         input.type = 'text' //az input typeja legyen text
-        input.id = form1[i].id //az input id-je legyen mindig az arrayban az id tulajdonság mögötti értékek valamelyik attól függ hol tartunk az iterácion. 
-        input.name = form1[i].id //az input name-je legyen szintén ugyan az mint az id mert az ugyan az.
+        input.id = arrayform[i].id //az input id-je legyen mindig az arrayban az id tulajdonság mögötti értékek valamelyik attól függ hol tartunk az iterácion. 
+        input.name = arrayform[i].id //az input name-je legyen szintén ugyan az mint az id mert az ugyan az.
 
         const br = document.createElement('br')  // csinálunk egy br-t hogy ne legyn csúnya és ne legyen olyan közel egymáshoz minden
 
@@ -102,7 +102,7 @@ function formgenerate() { //formgenerate függvény létrehozása
    form.appendChild(button) //majd a gombot pedig a formhoz
 }
 
-formgenerate() //majd meghívjuk ezt a csodálatos függvényt
+formgenerate(form1) //majd meghívjuk ezt a csodálatos függvényt
 
 const tablazat = document.createElement('table') // Létrehozzuk a táblázat változo
 document.body.appendChild(tablazat) // hozzá appendáljuk a táblázatot a bodyhoz
